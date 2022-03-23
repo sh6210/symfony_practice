@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Services\MessageGenerator;
 use Exception;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LuckyController extends AbstractController
 {
-    public function __construct(Logger $logger)
+    public function __construct(LoggerInterface $logger)
     {
 //        $logger->info('checking');
 //        throw $this->createNotFoundException('Hmm, looks like you are lost in the OZ');
@@ -22,8 +23,9 @@ class LuckyController extends AbstractController
      *
      * @Route("/lucky/number")
      */
-    public function number(Request $request): Response
+    public function number(Request $request, LoggerInterface $logger, MessageGenerator $messageGenerator): Response
     {
+        dd($messageGenerator->getHappyMessage());
         $number = random_int(0, 100);
 
         /*return new Response(
