@@ -12,6 +12,11 @@ framework:
         cookie_samesite: lax
         storage_factory_id: session.storage.factory.native
 
+    cache:
+        app: cache.adapter.filesystem
+        system: cache.adapter.system
+        directory: '%kernel.cache_dir%/pools'
+
     #esi: true
     #fragments: true
     php_errors:
